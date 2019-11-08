@@ -23,5 +23,18 @@
   "bugs": {
     "url": "https://github.com/FallenMapoBridge/visquit-backend/issues"
   },
-  "homepage": "https://github.com/FallenMapoBridge/visquit-backend#readme"
+  "homepage": "https://github.com/FallenMapoBridge/visquit-backend#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "formidable": "^1.2.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "sequelize": "^5.21.2",
+    "winston": "^3.2.1"
+  }
 }
