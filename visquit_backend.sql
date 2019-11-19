@@ -37,12 +37,10 @@ CREATE TABLE ORDERITEM_TB (
     item_id INT(11) unsigned AUTO_INCREMENT,
     order_id INT(11) unsigned,
     menu_id INT(11) unsigned,
-    store_id INT(11) unsigned,
     item_quantity INT(11) unsigned,
     item_price INT(11) unsigned,
     primary key (item_id),
     foreign key (order_id) references ORDERS_TB (order_id),
-    foreign key (menu_id) references MENU_TB (menu_id),
-    foreign key (store_id) references STORE_TB (store_id)
+    foreign key (menu_id) references MENU_TB (menu_id)
 );
 
