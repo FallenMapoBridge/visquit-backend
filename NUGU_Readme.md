@@ -2,7 +2,7 @@
 
 ## Intent <hr>
 
-### 1. Order
+### A. Order
 <ol>
 
 #### <li> order.burger
@@ -27,7 +27,7 @@
   
 </ol>
 
-### 2. Ask something
+### B. Ask something
 
 <ol>
 
@@ -42,5 +42,41 @@
 #### <li> ask.recommend
 
 - ask to recommend delicious menu.
+
+</ol>
+
+## Entitiy <hr>
+
+### A. Burgers
+
+<ol>
+
+#### <li> variety kinds of burgers
+
+</ol>
+
+### B. BID_QT_COUNT (default entity)
+
+<ol>
+
+##### <li> quantity (one, two, three, ... )
+
+</ol>
+
+## Actions <hr>
+
+### A. Custom Actions
+
+<ol>
+
+#### <li> TBA
+
+</ol>
+
+### B. Built-in Actions 
+
+<ol>
+
+#### <li> TBA
 
 </ol>
