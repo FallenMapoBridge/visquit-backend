@@ -55,7 +55,13 @@
 
 </ol>
 
-### B. BID_QT_COUNT (default entity)
+### B. Sets
+
+### C. Sides
+
+### D. Beverages
+
+### E. BID_QT_COUNT (default entity)
 
 <ol>
 
