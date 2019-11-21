@@ -2,24 +2,45 @@
 
 ## Intent <hr>
 
-### 1. 주문하기
+### 1. Order
+<ol>
 
-#### - order.burger
+#### <li> order.burger
 
-#### - order.set
+- order only burger.
 
-#### - order.side
+#### <li> order.set
 
-#### - order.beverage
+- order a set of burger.
 
-#### - order.morning
+#### <li> order.side
 
-### 2. 질문하기
+- order side menu like frech fry.
 
-#### - ask.taste
+#### <li> order.beverage
 
-#### - ask.spicy
+- order a beverage like cola.
 
-#### - ask.recommend
+#### <li> order.morning
 
-#### - ask.spicy
+- order morning set like mc morning.
+  
+</ol>
+
+### 2. Ask something
+
+<ol>
+
+#### <li> ask.taste
+
+- ask some menu is salty or not.
+
+#### <li> ask.spicy
+
+- ask some menu is spicy of not.
+
+#### <li> ask.recommend
+
+- ask to recommend delicious menu.
+
+</ol>
