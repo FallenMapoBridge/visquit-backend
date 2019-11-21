@@ -2,7 +2,7 @@
 
 ## Database
 
-![Databse](/src/database.png)
+![Databse](/src/database.PNG)
 
 ### Table description
 #### USER_TB(로그인한 점주에 대한 정보 테이블)
