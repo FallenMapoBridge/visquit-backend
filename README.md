@@ -11,24 +11,24 @@
 
 #### STORE_TB(가게에 대한 정보 테이블)
 * store_id(PK): store의 id
-* user_id(FK): reference USER_TB table 하나의 user는 여러 store를 소유 가능
+* user_id(FK): reference USER_TB table -> 하나의 user는 여러 store를 소유 가능
 * store_location: 가게의 위치 정보
 * Store_tel: 가게의 전화번호
  
 #### MENU_TB (가게의 메뉴에 대한 정보 테이블)
 * menu_id(PK): menu의 id
-* store_id(FK): reference STORE_TB table 하나의 store는 여러 개의 menu 소유 가능
+* store_id(FK): reference STORE_TB table -> 하나의 store는 여러 개의 menu 소유 가능
 * menu_name: 메뉴 이름
 * Menu_price: 해당 메뉴 하나 당 가격
 
 #### ORDERITEM_TB (단일 메뉴 주문에 대한 정보 테이블)
 * item_id(PK): 하나의 item에 대한 id
-* order_id(FK): reference ORDERS_TB table 하나의 order에는 여러 개의 item이 존재 가능
-* menu_id(FK): reference MENU_TB table 하나의 menu는 여러 번 주문 될 수 있음
+* order_id(FK): reference ORDERS_TB table -> 하나의 order에는 여러 개의 item이 존재 가능
+* menu_id(FK): reference MENU_TB table -> 하나의 menu는 여러 번 주문 될 수 있음
 * Item_quantity: 해당 menu를 주문하려는 수량
 * Item_price: menu_price * item_quantity
 
-#### ORDERS_TB (한 번의 주문에 대한 정보 테이블) 여러 item이 모여서 하나의 order 구성
+#### ORDERS_TB (한 번의 주문에 대한 정보 테이블) -> 여러 item이 모여서 하나의 order 구성
 * order_id(PK): 주문에 대한 id 
 * store_id(FK): reference STORE_TB table
 * order_date: 주문 날짜
