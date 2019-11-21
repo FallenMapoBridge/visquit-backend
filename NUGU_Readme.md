@@ -10,16 +10,16 @@
 
 #### - order.side
 
-#### order.beverage
+#### - order.beverage
 
-#### order.morning
+#### - order.morning
 
 ### 2. 질문하기
 
-#### ask.taste
+#### - ask.taste
 
-#### ask.spicy
+#### - ask.spicy
 
-#### ask.recommend
+#### - ask.recommend
 
-#### ask.spicy
+#### - ask.spicy
