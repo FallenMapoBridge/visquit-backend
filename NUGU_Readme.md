@@ -1,6 +1,6 @@
 # NUGU Play kit
 
-## Intent <hr>
+## Intent
 
 ### A. Order
 <ol>
@@ -45,7 +45,7 @@
 
 </ol>
 
-## Entitiy <hr>
+## Entitiy
 
 ### A. Burgers
 
@@ -63,7 +63,7 @@
 
 </ol>
 
-## Actions <hr>
+## Actions
 
 ### A. Custom Actions
 
