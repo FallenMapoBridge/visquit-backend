@@ -1,4 +1,4 @@
-# 이것은 NUGU Play kit Readme 이다
+# NUGU Play kit
 
 ## Intent <hr>
 
