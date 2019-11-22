@@ -31,7 +31,11 @@ module.exports = function(sequelize, DataTypes) {
     order_price: {
       type: DataTypes.INTEGER(11).UNSIGNED,
       allowNull: true
-    }
+    },
+    serve_fl:{
+      type: DataTypes.INTEGER(1),
+      allowNull:true
+    },
   }, {
     timestamps:false,
     tableName: 'ORDERS_TB'

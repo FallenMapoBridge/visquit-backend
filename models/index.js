@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import Sequelize from 'sequelize';
 
-const env = process.env.NODE_ENV || 'developement';
+const env = process.env.NODE_ENV;
+// const env = process.env.NODE_ENV || 'developement';
 
 // const config =x
 const config = require(`${__dirname}/../config/sequelize.json`)[env];
