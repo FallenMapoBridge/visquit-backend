@@ -3,7 +3,7 @@ const httpcode=require('../common/http_status_enum');
 class BaseResult {
   constructor() {
     this.results = [];
-    this.status = 'OK';
+    this.status = 'NULL';
     this.message = '';
   }
 }

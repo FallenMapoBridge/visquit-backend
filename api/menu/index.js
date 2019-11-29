@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const orderController = require('./order.controller');
+const menuController = require('./menu.controller');
 
 /* ************************************** */
 /*                                        */
@@ -9,14 +9,13 @@ const orderController = require('./order.controller');
 /*                                        */
 /* ************************************** */
 
-// router.get(orderController.printdeat());
 
-router.get('/:sid',orderController.getOrders);
+router.post('/',menuController.createMenu);
 
-// router.post();
+router.get('/:menu_id',menuController.getMenu);
 
-// router.patch();
+router.put('/:menu_id',menuController.updateMenu);
 
-// router.delete();
+router.delete('/:menu_id',menuController.deleteMenu);
 
 module.exports = router;
