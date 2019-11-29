@@ -1,11 +1,10 @@
 const express = require('express');
-const Sequelize=require('Sequelize');
+const Sequelize = require('Sequelize');
 const db = require('../../models/index');
 const BaseResult = require('../common/baseResult');
 const httpcode = require('../common/http_status_enum');
 const identifyStore = require('../common/identifyStore');
-const onInValidStore = require('../common/onInValidStore');
-const onSQLError=require('../common/onSQLQuerry');
+const onEvent=require('../common/onEvent');
 
 
 // function foo(par1,par2){
@@ -25,7 +24,7 @@ function getOrders(req, res) {
   const orderHistory = db.visquit.orders.findAll({
     where: {
       store_id: req.params.sid,
-      serve_fl:{[Sequelize.Op.ne]:0}
+      serve_fl: { [Sequelize.Op.ne]: 0 }
     },
     order: [['order_date', 'DESC'], ['order_time', 'DESC']]
   }).then((orderchunk) => {
@@ -39,21 +38,21 @@ function getOrders(req, res) {
   identifyStore(req.params.sid)
     .then((isValid) => {
       if (!isValid) {
-        onInValidStore(res);
+        onEvent.onInValidStoreId(res);
         return;
       }
       Promise
         .all([orderHistory])
         .then(() => {
           res.status(httpcode.HTTP_OK)
-          .json(response);
+            .json(response);
         }).catch((error) => {
-          onSQLError(res);
+          onEvent.onSQLQueryError(res);
           console.log(error);
         })
     }).catch((error) => {
       console.log(error);
-      onSQLError(res);
+      onEvent.onSQLQueryError(res);
     })
 }
 
@@ -67,7 +66,11 @@ function completeOrder(req, res) {
 
 }
 
+function createOrder(req, res) {
+
+}
 
 module.exports.getOrders = getOrders;
 module.exports.updateOrder = updateOrder;
 module.exports.completeOrder = completeOrder;
+module.exports.createOrder = createOrder;

@@ -1,5 +1,5 @@
-const baseResult=require('../common/baseResult');
-const httpcode=require('../common/http_status_enum');
+const baseResult=require('./baseResult');
+const httpcode=require('./http_status_enum');
 
 module.exports = function (res) {
   const BaseResult=new baseResult();

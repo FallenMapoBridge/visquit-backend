@@ -13,6 +13,8 @@ const orderController = require('./order.controller');
 
 router.get('/:sid',orderController.getOrders);
 
+// router.post()
+
 // router.post();
 
 // router.patch();

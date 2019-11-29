@@ -4,8 +4,7 @@ const db = require('../../models/index');
 const BaseResult = require('../common/baseResult');
 const httpcode = require('../common/http_status_enum');
 const identifyStore = require('../common/identifyStore');
-const onInValidStore = require('../common/onInValidStore');
-const onSQLError = require('../common/onSQLQuerry');
+const onEvent=require('../common/onEvent');
 
 function createMenu(req, res) {
   const response = new BaseResult();
@@ -25,13 +24,13 @@ function createMenu(req, res) {
     response.status = 'OK';
   }).catch((err) => {
     console.log(err);
-    onSQLError(res);
+    onEvent.onSQLQueryError(res);
   });
 
   identifyStore(query.store_id)
     .then((isValid) => {
       if (!isValid) {
-        onInValidStore(res);
+        onEvent.onInValidStoreId(res);
         return;
       }
       Promise.all([createMenu])
@@ -40,11 +39,11 @@ function createMenu(req, res) {
         })
         .catch((err) => {
           console.log(err);
-          onSQLError(err);
+          onEvent.onSQLQueryError(err);
         })
     }).catch((err) => {
       console.log(err);
-      onSQLError(err);
+      onEvent.onSQLQueryError(err);
     })
 }
 
@@ -65,7 +64,7 @@ function getMenu(req, res) {
   identifyStore(query.store_id)
     .then((isValid) => {
       if (!isValid) {
-        onInValidStore(res);
+        onEvent.onInValidStoreId(res);
         return;
       }
       Promise.all([menuInfo])
@@ -73,12 +72,12 @@ function getMenu(req, res) {
           res.status(httpcode.HTTP_OK).json(response)
         })
         .catch((err) => {
-          onSQLError(res);
+          onEvent.onSQLQueryError(res);
           console.log(err);
         })
     })
     .catch((err) => {
-      onSQLError(res);
+      onEvent.onSQLQueryError(res);
       console.log(err);
     });
 }
@@ -100,14 +99,14 @@ function updateMenu(req, res) {
       response.results.push(updateMenu);
      })
     .catch((err) => {
-      onSQLError(res);
+      onEvent.onSQLQueryError(res);
       console.log(err);
     });
 
   identifyStore(query.store_id)
     .then((isValid) => {
       if (!isValid) {
-        onInValidStore(res);
+        onEvent.onInValidStoreId(res);
         return;
       }
       Promise.all([updateMenuInfo])
@@ -115,12 +114,12 @@ function updateMenu(req, res) {
         res.status(httpcode.HTTP_OK).json(response);
        })
       .catch((err)=>{
-        onSQLError(res);
+        onEvent.onSQLQueryError(res);
         console.log(err);
       })
     })
     .catch((err) => {
-      onSQLError(res);
+      onEvent.onSQLQueryError(res);
       console.log(err);
     })
 }
