@@ -18,7 +18,7 @@ app.get('/health', (req, res) => {
 });
 // app.use('path',require('middleware javascript path'));
 
-app.use('/orders', require('./api/order/index'));
+app.use('/store', require('./api/store/index'));
 app.use('/menu', require('./api/menu/index'));
 
 // app.use('/users', require('./api/users/index')); // express 미들웨어

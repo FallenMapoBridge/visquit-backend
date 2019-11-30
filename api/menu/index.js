@@ -5,7 +5,7 @@ const menuController = require('./menu.controller');
 
 /* ************************************** */
 /*                                        */
-/* API ENTRY : https://{host_name}/orders */
+/* API ENTRY : https://{host_name}/menu */
 /*                                        */
 /* ************************************** */
 

@@ -1,21 +1,24 @@
 const express = require('express');
 
 const router = express.Router();
-const orderController = require('./order.controller');
+const storeController = require('./store.controller');
 
 /* ************************************** */
 /*                                        */
-/* API ENTRY : https://{host_name}/orders */
+/* API ENTRY : https://{host_name}/store  */
 /*                                        */
 /* ************************************** */
 
 // router.get(orderController.printdeat());
 
-router.get('/:sid',orderController.getOrders);
 
-router.post('/:sid',orderController.createOrder);
+router.post('/:sid/orders',storeController.createOrder);
 
-router.patch('/:sid/:oid',orderController.updateOrder);
+router.get('/:sid/orders',storeController.getCurrentOrder);
+
+router.get('/:sid/orders/history',storeController.getOrderHistory);
+
+router.put('/:sid/orders/:oid',storeController.updateOrder);
 // flag에 따라 update order 혹은 completeorder
 
 // router.post()
