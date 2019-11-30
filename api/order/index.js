@@ -13,6 +13,11 @@ const orderController = require('./order.controller');
 
 router.get('/:sid',orderController.getOrders);
 
+router.post('/:sid',orderController.createOrder);
+
+router.patch('/:sid/:oid',orderController.updateOrder);
+// flag에 따라 update order 혹은 completeorder
+
 // router.post()
 
 // router.post();

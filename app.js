@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const httpcode = require('./api/common/http_status_enum')
 const all_routes = require('express-list-endpoints');
+const fs = require('fs');
 
 
 const app = express();
@@ -30,5 +31,13 @@ app.use('/menu', require('./api/menu/index'));
 //   }
 // })
 console.log(all_routes(app));
+
+
+
+fs.writeFile ("current_api_entries.json", JSON.stringify(all_routes(app),null," "), function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);
 
 module.exports = app;

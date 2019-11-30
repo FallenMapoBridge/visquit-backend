@@ -10,12 +10,14 @@ const menuController = require('./menu.controller');
 /* ************************************** */
 
 
-router.post('/',menuController.createMenu);
+router.post('/', menuController.createMenu);
 
-router.get('/:menu_id',menuController.getMenu);
+router.get('/', menuController.getMenus);
 
-router.put('/:menu_id',menuController.updateMenu);
+router.get('/:menu_id', menuController.getMenuInfo);
 
-router.delete('/:menu_id',menuController.deleteMenu);
+router.put('/:menu_id', menuController.updateMenu);
+
+router.delete('/:menu_id', menuController.deleteMenu);
 
 module.exports = router;

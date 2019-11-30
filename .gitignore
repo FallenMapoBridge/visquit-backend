@@ -111,3 +111,5 @@ config
 
 # http request
 httprequest
+
+current_api_entries.json

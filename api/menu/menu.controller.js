@@ -39,15 +39,54 @@ function createMenu(req, res) {
         })
         .catch((err) => {
           console.log(err);
-          onEvent.onSQLQueryError(err);
+          onEvent.onSQLQueryError(res);
+          return;
         })
     }).catch((err) => {
       console.log(err);
-      onEvent.onSQLQueryError(err);
+      onEvent.onSQLQueryError(res);
+      return;
     })
 }
 
-function getMenu(req, res) {
+function getMenus(req, res) {
+  const response = new BaseResult();
+  const query = { store_id: req.query.store_id };
+
+  const menuInfo = db.visquit.menu.findAll({
+    where: {
+      store_id: query.store_id,
+    },
+  }).then((menuList) => {
+    response.status = 'OK';
+    response.results.push(menuList);
+  });
+
+  identifyStore(query.store_id)
+    .then((isValid) => {
+      if (!isValid) {
+        onEvent.onInValidStoreId(res);
+        return;
+      }
+      Promise.all([menuInfo])
+        .then(() => {
+          res.status(httpcode.HTTP_OK).json(response)
+        })
+        .catch((err) => {
+          onEvent.onSQLQueryError(res);
+          console.log(err);
+          return;
+
+        })
+    })
+    .catch((err) => {
+      onEvent.onSQLQueryError(res);
+      console.log(err);
+    });
+}
+
+
+function getMenuInfo(req, res) {
   const response = new BaseResult();
   const query = { store_id: req.query.store_id };
 
@@ -74,11 +113,13 @@ function getMenu(req, res) {
         .catch((err) => {
           onEvent.onSQLQueryError(res);
           console.log(err);
+          return;
         })
     })
     .catch((err) => {
       onEvent.onSQLQueryError(res);
       console.log(err);
+      return;
     });
 }
 
@@ -101,6 +142,8 @@ function updateMenu(req, res) {
     .catch((err) => {
       onEvent.onSQLQueryError(res);
       console.log(err);
+      return;
+
     });
 
   identifyStore(query.store_id)
@@ -116,19 +159,59 @@ function updateMenu(req, res) {
       .catch((err)=>{
         onEvent.onSQLQueryError(res);
         console.log(err);
+        return;
+
       })
     })
     .catch((err) => {
       onEvent.onSQLQueryError(res);
       console.log(err);
+      return;
+
     })
 }
 
 function deleteMenu(req, res) {
+  const response = new BaseResult();
+  const query = { store_id: req.query.store_id };
+
+  const deleteMenu=db.visquit.menu.destroy(
+    {
+      where:{
+        menu_id:req.params.menu_id
+      }
+    }
+  ).then(()=>{
+    response.status='OK';
+  })
+  .catch((err)=>{
+    onEvent.onSQLQueryError(res);
+    console.log(err);
+    return;
+
+  });
+
+  identifyStore(query.store_id)
+  .then((isValid)=>{
+    if(!isValid){
+      onEvent.onInValidStoreId(res);
+      return;
+    }
+    Promise.all([deleteMenu])
+    .then(()=>{
+      res.status(httpcode.HTTP_OK).json(response);
+    })
+    .catch((err)=>{
+      onEvent.onSQLQueryError(res);
+      console.log(err);
+      return;
+    })
+  })
 
 }
 
 module.exports.createMenu = createMenu;
-module.exports.getMenu = getMenu;
+module.exports.getMenus=getMenus;
+module.exports.getMenuInfo = getMenuInfo;
 module.exports.updateMenu = updateMenu;
 module.exports.deleteMenu = deleteMenu;
