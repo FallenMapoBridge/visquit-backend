@@ -37,16 +37,6 @@
         "와퍼 주니어 세트 하나",
         "와퍼 주니어 세트 하나 주세요"
       ],
-      "order.burger": [
-        "불고기 와퍼 단품 한 개",
-        "불고기 와퍼 단품 1개 주세요",
-        "불고기 와퍼 단품 하나 줘",
-        "불고기 와퍼 단품 하나",
-        "와퍼 주니어 단품 하나 줘",
-        "와퍼 주니어 단품 1개 주세요",
-        "와퍼 주니어 단품 하나",
-        "와퍼주니어 단품 줘"
-      ],
       "ask.recommend": [
         "맛있는거 추천해줘",
         "버거 뭐가 맛있어?"
@@ -56,11 +46,21 @@
       ],
       "ask.taste": [
         "치즈 와퍼 느끼해?"
+      ],
+      "order": [
+        "[BURGER:BURGER]불고기 와퍼[/BURGER:BURGER] [BURGER_COUNT:BURGER_COUNT]하나[/BURGER_COUNT:BURGER_COUNT] [BEVERAGE:BEVERAGE]콜라[/BEVERAGE:BEVERAGE] [BEVERAGE_COUNT:BEVERAGE_COUNT]한 잔[/BEVERAGE_COUNT:BEVERAGE_COUNT] [SIDE_MENU:SIDE_MENU]치즈스틱[/SIDE_MENU:SIDE_MENU] [SIDE_MENU_COUNT:SIDE_MENU_COUNT]하나[/SIDE_MENU_COUNT:SIDE_MENU_COUNT] 줘"
       ]
     }
   ],
   "userDictList": [
     {
+      "SIDE_MENU_COUNT": {
+        "다섯 개": [],
+        "세 개": [],
+        "한 개": [],
+        "두 개": [],
+        "네 개": []
+      },
       "BURGER": {
         "BULGOGI BUGER": [
           "불고기",
@@ -101,6 +101,30 @@
           "베이컨 치즈 와퍼 버거",
           "베이컨 치즈 와퍼"
         ]
+      },
+      "BEVERAGE": {
+        "콜라": [],
+        "아이스 아메리카노": []
+      },
+      "BEVERAGE_COUNT": {
+        "한 잔": [],
+        "두 잔": [],
+        "네 잔": [],
+        "다섯 잔": [],
+        "세 잔": []
+      },
+      "BURGER_COUNT": {
+        "여섯개": [],
+        "다섯개": [],
+        "한 개": [
+          "하나"
+        ],
+        "두 개": [],
+        "세개": [],
+        "네개": []
+      },
+      "SIDE_MENU": {
+        "치즈스틱": []
       }
     }
   ]
