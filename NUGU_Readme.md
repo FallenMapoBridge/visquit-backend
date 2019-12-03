@@ -1,6 +1,5 @@
-# NUGU Play kit
 
-# Backend Proxy 구축하기
+# Backend Proxy 구축.
 
 Play에서는 사용자의 발화를 분석한 내용을 기반으로 적절한 응답을 내보내 주거나 동작을 수행함. <br>
 이 응답에 필요한 정보가 외부 서버로부터 가져와야 하는 경우는 REST API를 통해 요청, <br>
@@ -24,13 +23,25 @@ Backend proxy API 규격은 다음과 같은 정보를 Backend proxy 서버로 �
 |Parameters|Play에서 정의된 Parameter들이 전달.<br>    Utterance Parameter에는 Play 사용자의 실제 발화에 담긴 Entity 혹은 그 Entity가 정규화된 값이 "value"로 전달.<br>   Backend Parameter는 "value"를 담아서 Play로 전달하게 될 Parameter, value는 "null"로 전달.   Utterance/Backend Parameter를 구분할 수 없으므로, Play에서 어떻게 정의를 했는지 파악한 후 구현해야 함.|
 |Context<br>정보|사용자 식별 token, 디바이스 상태 정보 등.|
 |Event 정보|디바이스에서 발생한 Event 정보|
-
+<br>
+<br>
+## REST API URL
+<br>
+REST API 호출은 Backend proxy 사용하도록 지정한 Action에서만 이루어짐. <br>
+각 Action 별로 고유한 REST API URL 결정.
+<br>
+REST API URL 생성 규칙은 다음과 같음.<br>
+- Play Builder > General > 외부 서버 연결 정보 > Web URL + Play Builder > Actions > Action Name<br>
+<br>
+예) 외부 서버 연결 정보 Web URL이 http://backend_proxy.nugu.com 설정하고, Action 이름이 "order_burger"로 설정했다면 해당 Action 처리 REST API URL은<br>
+http://backend_proxy.com/order_burger<br>
+<br>
 # 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
 
-GET POST 요청 둘 다 백엔드 서버로 들어옵니다 <br>
+GET POST 요청 둘 다 백엔드 서버로 들어옴 <br>
 누구에서 GET POST 요청 둘 다 보내는데 post로 해야하는 이유는 <br>
-NUGU에서 url은 하나이기 때문에 GET으로 하면 /Burger/<str:버거이름> 이 url로 GET을 보내야 하는데 <br>
-누구에서 동적 url을 못 날려줘서 post로 방법을 바꿔야합니다. <br>
+NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버거이름> 이 url로 GET을 보내야 하는데 <br>
+누구에서 동적 url을 못 날려줘서 post로 방법을 바꿔야함. <br>
 
 
 
