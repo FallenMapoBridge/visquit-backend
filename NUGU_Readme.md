@@ -22,9 +22,8 @@ Backend proxy API 규격은 다음과 같은 정보를 Backend proxy 서버로 �
 |Action <br>이름|Backend proxy에서 처리해야 하는 요청을 구분하는 데 사용됩니다.   어떠한 Action이 Backend proxy를 호출했는지 확인할 수 있습니다. (Aciont은 함수라고 생각)|
 |Parameters|Play에서 정의된 Parameter들이 전달.<br>    Utterance Parameter에는 Play 사용자의 실제 발화에 담긴 Entity 혹은 그 Entity가 정규화된 값이 "value"로 전달.<br>   Backend Parameter는 "value"를 담아서 Play로 전달하게 될 Parameter, value는 "null"로 전달.   Utterance/Backend Parameter를 구분할 수 없으므로, Play에서 어떻게 정의를 했는지 파악한 후 구현해야 함.|
 |Context<br>정보|사용자 식별 token, 디바이스 상태 정보 등.|
-|Event 정보|디바이스에서 발생한 Event 정보|
-<br>
-<br>
+|Event 정보|디바이스에서 발생한 Event 정보|<br><br>
+
 ## REST API URL
 <br>
 REST API 호출은 Backend proxy 사용하도록 지정한 Action에서만 이루어짐. <br>
@@ -36,7 +35,7 @@ REST API URL 생성 규칙은 다음과 같음.<br>
 예) 외부 서버 연결 정보 Web URL이 http://backend_proxy.nugu.com 설정하고, Action 이름이 "order_burger"로 설정했다면 해당 Action 처리 REST API URL은<br>
 http://backend_proxy.com/order_burger<br>
 <br>
-# 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
+## 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
 
 GET POST 요청 둘 다 백엔드 서버로 들어옴 <br>
 누구에서 GET POST 요청 둘 다 보내는데 post로 해야하는 이유는 <br>
