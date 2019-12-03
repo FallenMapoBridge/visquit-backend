@@ -13,7 +13,7 @@ GET POST 요청 둘 다 백엔드 서버로 들어옵니다 <br>
 NUGU에서 url은 하나이기 때문에 GET으로 하면 /Burger/<str:버거이름> 이 url로 GET을 보내야 하는데 <br>
 누구에서 동적 url을 못 날려줘서 post로 방법을 바꿔야합니다. <br>
 
-![REST_API_overview](/src/REST_API_overview.PNG)
+![REST_API_overview](/src/REST_API_overview.png)
 
 ## Intent
 
