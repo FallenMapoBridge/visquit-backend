@@ -33,9 +33,9 @@ REST API URL 생성 규칙은 다음과 같음.<br>
 - Play Builder > General > 외부 서버 연결 정보 > Web URL + Play Builder > Actions > Action Name<br>
 <br>
 예) 외부 서버 연결 정보 Web URL이 http://backend_proxy.nugu.com 설정하고, Action 이름이 "order_burger"로 설정했다면 해당 Action 처리 REST API URL은<br>
-http://backend_proxy.com/order_burger<br>
-<br>
-# 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
+http://backend_proxy.com/order_burger<br><br>
+
+## 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
 
 GET POST 요청 둘 다 백엔드 서버로 들어옴 <br>
 누구에서 GET POST 요청 둘 다 보내는데 post로 해야하는 이유는 <br>
