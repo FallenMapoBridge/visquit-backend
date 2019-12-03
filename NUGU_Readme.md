@@ -3,13 +3,19 @@
 # Backend Proxy 구축하기
 
 Play에서는 사용자의 발화를 분석한 내용을 기반으로 적절한 응답을 내보내 주거나 동작을 수행합니다. <br>
-이 응답에 필요한 정보가 외부 서버로부터 가져와야 하는 경우는 REST API를 통해 요청해야 하며, 음악을 재생하는 등의 디바이스를 동작시키는 명령을 정의하는 것도 Backend proxy에서 처리해야 합니다. <br>
+이 응답에 필요한 정보가 외부 서버로부터 가져와야 하는 경우는 REST API를 통해 요청해야 하며, 음악을 재생하는 등의 디바이스를 동작시키는 명령을 정의하는 것도 Backend proxy에서 처리해야 합니다. <br> <br>
 NUGU 플랫폼의 Dialog Manager는 지정된 포맷(Backend proxy API 규격)으로 요청을 하기 때문에 외부 서비스의 REST API 포맷이 Backend proxy API 규격과 다르다면 포맷을 변환해주기 위한 Backend proxy 서버를 개발해야 합니다.
 
 ![REST_API_overview](/src/REST_API_overview.png)
 
 NUGU 플랫폼에서는 Backend proxy를 구축할 수 있는 클라우드 환경을 제공하지 않음. <br>
 play를 개발하는 곳에서 직접 구축을 하거나 클라우드 서비스를 이용해야 하는데 우리는 AWS의 EC2를 사용할 예정 <br>
+
+![Backend_construct_process](/src/Backend_construct_process.png)
+
+Play Builder에 Action별로 설정된 정보를 기반으로 Action 당 하나의 REST API 포맷을 파악하고 Backend proxy 호출을 필요로 하는 Action 수만큼의 REST API를 지원하는 서버를 개발합니다.<br> 
+따라서 Play 외부 연동 서버 개발을 하려면 3번째 단계에서 REST API 포맷을 파악하는 방법을 이해하면 됩니다. <br>
+Backend proxy API 규격은 다음과 같은 정보를 Backend proxy 서버로 전달합니다. <br>
 
 # 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
 
