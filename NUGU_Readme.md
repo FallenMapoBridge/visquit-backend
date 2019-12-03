@@ -8,6 +8,9 @@ NUGU 플랫폼의 Dialog Manager는 지정된 포맷(Backend proxy API 규격)�
 
 ![REST_API_overview](/src/REST_API_overview.png)
 
+NUGU 플랫폼에서는 Backend proxy를 구축할 수 있는 클라우드 환경을 제공하지 않음. <br>
+play를 개발하는 곳에서 직접 구축을 하거나 클라우드 서비스를 이용해야 하는데 우리는 AWS의 EC2를 사용할 예정 <br>
+
 # 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
 
 GET POST 요청 둘 다 백엔드 서버로 들어옵니다 <br>
