@@ -20,9 +20,10 @@ Backend proxy API 규격은 다음과 같은 정보를 Backend proxy 서버로 �
 
 | 정보 | 설명 |
 | ---- | ---- |
-|Action 이름|Backend proxy에서 처리해야 하는 요청을 구분하는 데 사용됩니다.   어떠한 Action이 Backend proxy를 호출했는지 확인할 수 있습니다. (Aciont은 함수라고 생각)|
+|Action <br>이름|Backend proxy에서 처리해야 하는 요청을 구분하는 데 사용됩니다.   어떠한 Action이 Backend proxy를 호출했는지 확인할 수 있습니다. (Aciont은 함수라고 생각)|
 |Parameters|Play에서 정의된 Parameter들이 전달.<br>    Utterance Parameter에는 Play 사용자의 실제 발화에 담긴 Entity 혹은 그 Entity가 정규화된 값이 "value"로 전달.<br>   Backend Parameter는 "value"를 담아서 Play로 전달하게 될 Parameter, value는 "null"로 전달.   Utterance/Backend Parameter를 구분할 수 없으므로, Play에서 어떻게 정의를 했는지 파악한 후 구현해야 함.|
-
+|Context<br>정보|사용자 식별 token, 디바이스 상태 정보 등.|
+|Event 정보|디바이스에서 발생한 Event 정보|
 
 # 왜 GET 방식이 아닌 POST 방식을 사용해야 하는가?
 
