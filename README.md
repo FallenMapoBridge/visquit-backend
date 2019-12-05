@@ -341,3 +341,26 @@ GET POST 요청 둘 다 백엔드 서버로 들어옴 <br>
 누구에서 GET POST 요청 둘 다 보내는데 post로 해야하는 이유는 <br>
 NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버거이름> 이 url로 GET을 보내야 하는데 <br>
 누구에서 동적 url을 못 날려줘서 post로 방법을 바꿔야함. <br>
+
+# Play 정보 등록 시 주의 사항
+
+## Health check
+서비스 정상 여부를 확인하기 위해 다음의 /health url을 다음과 같이 구현해야 함. <br>
+NUGU developers에서는 이 URL을 주기적으로 요청해서 서버의 정상 여부를 판단함. <br>
+정상적으로 서비스가 가능하면 HTTP Status code를 "200 OK"로 리턴. (결과 텍스트는 OK 등 아무 문자나 리턴해도 됨.)<br>
+<br>
+만약 서비스에 문제가 있을 경우에는 "500 Internal Server Error" 등 200 이외의 HTTP Status Code를 리턴하면 됨.<br>
+
+~~~
+GET /health HTTP/1.1
+Accept: */*
+
+
+HTTP/1.1 200 OK
+Content-Length: 2
+OK
+~~~
+
+<br>
+
+>> 심사 요청 시 /health url이 정상 동작해야 하며, /health url에서 200 이외의 상태가 오래 지속되면 서비스가 직권 중지될 수 있으므로 유의해야 함.
