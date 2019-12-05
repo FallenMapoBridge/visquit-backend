@@ -38,7 +38,7 @@
 * serve_fl: 주문한 메뉴가 고객에게 제공되었는지 여부
 
 
-# NUGU Architecture Design
+
 
 ## Visquit-backend branch 전략
 
@@ -59,8 +59,10 @@
 : ddl,DB scheme description, table attribute description except DB configuration , develop branch에 머지됨.
 
 
+# NUGU Architecture Design
 
 ## General Setting
+
 ### 외부 연동 서버
 #### Web URL : TBA
 #### Exception message : "Err Code 404 서버에 연결하지 못했습니다"
