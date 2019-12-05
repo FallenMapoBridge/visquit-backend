@@ -42,33 +42,19 @@ GET POST 요청 둘 다 백엔드 서버로 들어옴 <br>
 NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버거이름> 이 url로 GET을 보내야 하는데 <br>
 누구에서 동적 url을 못 날려줘서 post로 방법을 바꿔야함. <br>
 
-
-
 ## Intent
 
 ### A. Order
 <ol>
 
-#### <li> order.burger
+#### <li> order
 
-- order only burger.
-
-#### <li> order.set
-
-- order a set of burger.
-
-#### <li> order.side
-
-- order side menu like frech fry.
-
-#### <li> order.beverage
-
-- order a beverage like cola.
-
-#### <li> order.morning
-
-- order morning set like mc morning.
-  
+- Command : (menu), (count), (ending of word)
+- ex) 불고기와퍼 한 개 줘
+발화 예시|불고기 와퍼|한 개|줘|
+|------|----|-----|-|
+|Category|menu|count|ending of word|
+|Entity|MENU|BID_QT_COUNT|STATEMENT|
 </ol>
 
 ### B. Ask something
