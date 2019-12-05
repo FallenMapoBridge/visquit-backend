@@ -106,7 +106,7 @@ NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버
 ### <li> Order Intent에 대한 Action : order_confirm
 Prompt<br>(NUGU 응답)|불고기 와퍼|한 개|주문되었습니다|더 주문할 것 있으신가요?|
 |------|----|-----|-|-------|
-|Category|menu|count|ment|ment|
+|Category|menu|count|mention|mention|
 |Utterance parameter|{{menu}}|{{count}}|fixed statement|fixed statement|
 
 <br>
@@ -264,9 +264,53 @@ Prompt<br>(NUGU 응답)|주문이 완료되었습니다|
 ## Actions
 
 ### A. NUGU.ACTION.Welcome
+
+<ul>
+<li>  Play에 최초로 진입했을 때 동작하는 action
+<li> 기기 대기(IDLE) 상태에서 '아리아 XXX 시작'과 같이 Play 호출이름(Invocation name)과 NUGU.INTENT.open을 함께 발화하거나,<br>
+- 이 경우에는 'Invocation name만 발화한 경우'에 해당하는 Prompt가 발화되며, Prompt가 발화된 이후 세션 대기 상태로 넘어가며, 이러한 Prompt를 '대기 Prompt'라고 합니다.
+<li> 기기 대기(IDLE) 상태에서 '아리아 XXX에서 ~~ 해줘' 와 같이 Play 호출이름과 해당 Play 내의 Custom Intent를 함께 발화하여 Play로 진입하게 되었을 때 동작하는 Action입니다.<br>
+- 이 경우에는 'Invocation name과 Intent를 함께 발화한 경우'에 해당하는 Prompt가 응답의 앞에 붙어서 발화됩니다. 이러한 Prompt를 '연속 Prompt'라고 합니다.
+</ul>
+
+
+
 ### B. NUGU.ACTION.exit
+  <ul>
+  <li> 사용자가 Play의 세션 안에서 '주문 끝', '더 주문할거 없어' 등 NUGU.INTENT.stop에 해당하는 발화를 한 경우에 동작합니다. Prompt가 발화된 이후, 세션이 종료되고 IDLE 상태로 돌아갑니다. 이러한 Prompt를 '종료 Prompt'라고 합니다.
+  </ul>
+
 ### C. NUGU.ACTION.rewind
+<ul>
+<li>사용자가 '다시', '다시 틀어줘', '재시작' 등과 같이 NUGU.INTENT.rewind에 해당하는 발화를 한 경우에 동작하는 Action입니다.
+<li>이 Action은 Response는 갖지 않으며, 최근 응답을 처음부터 재생하는 명령을 수행합니다.
+</ul>
+
+  
 ### D. NUGU.ACTION.fallback
+<ul>
+<li> 이 Play가 처리할 수 없는 발화가 들어온 경우에 동작하는 action
+<li>사용자가 Play 세션 내에서 발화를 했지만 처리할 Intent가 없는 경우에 동작합니다.
+<li> 사용자가 '다시', '다시 들려줘' 와 같이 말한 경우 동작하는 action
+<li> 처리할 Intent가 없는 상황 즉, Fallback 상황은 종료 유형과 대기 유형을 혼합하여 Prompt를 구성하는 복합 유형입니다.
+</ul>
+
+
+
 ### E. Order_confirm
+<ul>
+<li>주문한 내용을 고객에게 확인시켜주고 서버로 주문내용을 전달
+<li>
+</ul>
+
 ### F. End_order
+<ul>
+<li> 주문을 종료하는 함수.
+<li> 이 함수가 실행되면 서버로 주문이 종료되었음을 전달.
+</ul>
+
 ### G. Check_order
+<ul>
+<li> 손님이 주문한 내용을 확인하고 싶을 때 요청
+<li> 데이터베이스에서 주문 내용을 호출하여 서버를 통해 NUGU 스피커로 전달하여 손님에게 말함.
+</ul>
