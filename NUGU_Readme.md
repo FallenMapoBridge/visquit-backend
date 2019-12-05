@@ -51,6 +51,7 @@ NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버
 
 - Command : (menu), (count), (ending of word)
 - ex) 불고기와퍼 한 개 줘 <br>
+  
 발화 예시|불고기 와퍼|한 개|줘|
 |------|----|-----|-|
 |Category|menu|count|ending of word|
