@@ -57,7 +57,33 @@ NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버
 |Category|menu|count|ending of word|
 |Entity|MENU|BID_QT_COUNT|STATEMENT|
 
-- 
+- request sample<br>
+
+'''
+{
+    "version": "2.0",
+    "action": {
+        "actionName": "order",
+        "parameters": {
+            "bulgogi_whopper": { "type": "bulgogi_whopper", "value": "불고기와퍼", "quantity": "한개"},
+            "cheese_whopper": { "type": "cheese_whopper", "value": "치즈와퍼", "qiantitiy": "두개"}
+        }
+    },
+    "context": {
+        "session": {
+            "isPlayBuilderRequest": True,
+            "id": "a8b2d0e7-3d13-4e51-866f-bb4c03801594",
+            "isNew": True
+        },
+        "device": {
+            "type": "speaker",
+            "state": {}
+        },
+        "supportedInterfaces": {}  }
+    }
+}
+''' 
+
 </ol>
 
 
