@@ -44,29 +44,39 @@ NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버
 
 ## Intent
 
-### A. Order
+### A. Welcome.with.NUGU.INTENT.open
+- Precondition : Play 세션 진입이 Invocation Name + NUGU.INTENT.open인 경우
+(Invocation name과 함께 "시작/오픈" 이라고 발화한 경우)
+
+- Does this INTENT need backend proxy? YES
+
+- Output : 안녕하세요 비스킷입니다. 무엇을 주문하시겠어요? 메뉴 하나씩 주문해주세요.<br><br>
+
+
+### B. Order
 <ol>
 
-#### <li> order
+#### <li> 주문요청
 
 - Command : (menu), (count), (ending of word)
-- ex) 불고기와퍼 한 개 줘 <br>
+  <br> ex) 불고기와퍼 한 개 줘 <br>
   
 발화 예시|불고기 와퍼|한 개|줘|
 |------|----|-----|-|
 |Category|menu|count|ending of word|
-|Entity|MENU|BID_QT_COUNT|STATEMENT|
+|Entity|MENU|COUNT|STATEMENT|
+<br>
 
-- request sample<br>
+### <li>request sample<br>
 
-'''
+~~~json
 {
     "version": "2.0",
     "action": {
         "actionName": "order",
         "parameters": {
-            "bulgogi_whopper": { "type": "bulgogi_whopper", "value": "불고기와퍼", "quantity": "한개"},
-            "cheese_whopper": { "type": "cheese_whopper", "value": "치즈와퍼", "qiantitiy": "두개"}
+            "menu": { "type": "menu", "value": "불고기와퍼"},
+            "count": { "type": "count", "value": "두개"}
         }
     },
     "context": {
@@ -82,28 +92,128 @@ NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버
         "supportedInterfaces": {}  }
     }
 }
-''' 
+~~~
+<br>
+
+### <li> Does this INTENT need backend proxy? YES
+
+### <li> Order Intent에 대한 Action : order_confirm
+Prompt<br>(NUGU 응답)|불고기 와퍼|한 개|주문되었습니다|더 주문할 것 있으신가요?|
+|------|----|-----|-|-------|
+|Category|menu|count|ment|ment|
+|Utterance parameter|{{menu}}|{{count}}|fixed statement|fixed statement|
+
+<br>
+
+- End_Order라는 Intent가 실행될 때까지 Order Intent 반복.
 
 </ol>
 
 
-### B. Ask something
+### C. Ask something
 
 <ol>
 
 #### <li> ask.taste
 
 - ask some menu is salty or not.
+- Command : (menu), (ending of word)<br>
+  ex) 불고기와퍼 싱거워? <br>
+  
+발화 예시|불고기 와퍼|싱거워?|
+|------|----|------|
+|Category|menu|ending of word|
+|Entity|MENU|TASTE|
+<br>
+
+- Does this INTENT need backend proxy? NO
+
+- ask.taste에 대한 Action : answer_taste
+- Prompt<br>
+
+(NUGU 응답)|불고기 와퍼|는|짠편입니다|
+|---------|--------|-|-------|
+|Category|menu|postposition|taste|
+|Utterance parameter|{{menu}}|fixed postposition|{{taste}}|
 
 #### <li> ask.spicy
 
 - ask some menu is spicy of not.
+- Command : (menu), (ending of word)<br>
+  ex) 불고기와퍼 매워? <br>
+  
+발화 예시|불고기 와퍼|매워?|
+|------|----|------|
+|Category|menu|ending of word|
+|Entity|MENU|SPICY|
+<br>
+-  Does this INTENT need backend proxy? NO
+
+- ask.spicy에 대한 Action : answer_spicy
+- Prompt<br>
+
+(NUGU 응답)|불고기 와퍼|는|맵지않습니다|
+|---------|--------|-|-------|
+|Category|menu|postposition|spicy|
+|Utterance parameter|{{menu}}|fixed postposition|{{spicy}}|
 
 #### <li> ask.recommend
 
 - ask to recommend delicious menu.
 
 </ol>
+
+### D. End_Order
+
+<ol>
+  <li> Say you don't have anything to order
+<li> Command : (menu), (ending of word)<br>
+  ex) 불고기와퍼 매워? <br>
+  <br>
+
+발화 예시|더 주문할거 없어|
+|------|------|
+|Category|tell no more order|
+|Entity|END|
+
+### <li>request sample<br>
+
+~~~json
+{
+    "version": "2.0",
+    "action": {
+        "actionName": "END_order",
+        "parameters": {
+            "end": { "type": "end", "value": "END"}
+        }
+    },
+    "context": {
+        "session": {
+            "isPlayBuilderRequest": True,
+            "id": "a8b2d0e7-3d13-4e51-866f-bb4c03801594",
+            "isNew": True
+        },
+        "device": {
+            "type": "speaker",
+            "state": {}
+        },
+        "supportedInterfaces": {}  }
+    }
+}
+~~~
+### <li> Does this INTENT need backend proxy? YES
+
+### <li> End_Order에 대한 Action : End_Order
+Prompt<br>(NUGU 응답)|주문이 완료되었습니다|
+|------|----|
+|Category|statement|
+|Utterance parameter|fixed statement|
+
+<br>
+
+</ol>
+
+### E. Check ordered Menu
 
 ## Entitiy
 
