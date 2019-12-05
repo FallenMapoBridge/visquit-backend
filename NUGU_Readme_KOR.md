@@ -44,8 +44,8 @@ NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버
 
 ## General Setting
 ### 외부 연동 서버
-#### Web URL:TBA
-#### Exception message : "서버에 연결하지 못했습니다"
+#### Web URL : TBA
+#### Exception message : "Err Code 404 서버에 연결하지 못했습니다"
 
 
 ## Intent
