@@ -42,6 +42,12 @@ GET POST 요청 둘 다 백엔드 서버로 들어옴 <br>
 NUGU에서 url은 하나이기 때문에 GET으로 하면 /order_burger/<str:버거이름> 이 url로 GET을 보내야 하는데 <br>
 누구에서 동적 url을 못 날려줘서 post로 방법을 바꿔야함. <br>
 
+## General Setting
+### 외부 연동 서버
+#### Web URL:TBA
+#### Exception message : "서버에 연결하지 못했습니다"
+
+
 ## Intent
 
 ### A. Welcome.with.NUGU.INTENT.open
@@ -217,43 +223,50 @@ Prompt<br>(NUGU 응답)|주문이 완료되었습니다|
 
 ## Entitiy
 
-### A. Burgers
+### A. Menu
+- 주문할 메뉴를 나타냄
 
-<ol>
+|Parameter|synonym|
+|---------|-------|
+|불고기와퍼|불고기와퍼, 와퍼불고기, 불고기 들어간 와퍼|
+|치즈와퍼|치즈와퍼, 와퍼치즈, 치즈 들어간 와퍼, 치즈맛 와퍼|
+|치즈스틱|치즈스틱, 스틱치즈|
+|콜라|콜라, coke|
+|아이스아메리카노|아이스아메리카노, 아메리카노 아이스, 시원한 아메리카노|
+|따뜻한아메리카노|따뜻한아메리카노, 아메리카노 따뜻한거, 아메리카노 핫|
 
-#### <li> variety kinds of burgers
+- 메뉴는 추후 추가 에정
 
-</ol>
+### B. COUNT 
+- 메뉴의 수량을 나타냄.
 
-### B. Sets
+|Parameter|Synonym|
+|---------|-------|
+|1|한개, 하나|
+|2|두개|
+|3|세개|
+|...|...|
 
-### C. Sides
+### C. END
+- 주문의 종료를 나타냄.
+- 
+|Parameter|Synonym|
+|---------|-------|
+|END|END, 더 없어, 주문끝, 없어, 없습니다, ...|
 
-### D. Beverages
-
-### E. BID_QT_COUNT (default entity)
-
-<ol>
-
-##### <li> quantity (one, two, three, ... )
-
-</ol>
+### D. Statement
+- 종결어미
+  
+|Parameter|Synonym|
+|---------|-------|
+|주세요|줘, 요, 주세요, 줘요|
 
 ## Actions
 
-### A. Custom Actions
-
-<ol>
-
-#### <li> TBA
-
-</ol>
-
-### B. Built-in Actions 
-
-<ol>
-
-#### <li> TBA
-
-</ol>
-
+### A. NUGU.ACTION.Welcome
+### B. NUGU.ACTION.exit
+### C. NUGU.ACTION.rewind
+### D. NUGU.ACTION.fallback
+### E. Order_confirm
+### F. End_order
+### G. Check_order
