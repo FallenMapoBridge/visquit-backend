@@ -17,8 +17,7 @@ db.visquit = {};
 /*_____________VISQUIT_____________*/
 
 db.visquit.menu = require('./MENU_TB')(sequelize, Sequelize);
-db.visquit.orderitem = require('./ORDERITEM_TB')(sequelize, Sequelize);
-db.visquit.orders = require('./ORDERS_TB')(sequelize, Sequelize);
+db.visquit.order = require('./ORDER_TB')(sequelize, Sequelize);
 db.visquit.store = require('./STORE_TB')(sequelize, Sequelize);
 db.visquit.user = require('./USER_TB')(sequelize, Sequelize);
 
@@ -38,7 +37,7 @@ db.visquit.store.belongsTo(db.visquit.user, {
 db.visquit.store.hasMany(db.visquit.menu, {
   foreignKey: 'store_id'
 });
-db.visquit.store.hasMany(db.visquit.orders, {
+db.visquit.store.hasMany(db.visquit.order, {
   foreignKey: 'store_id'
 })
 
@@ -47,27 +46,13 @@ db.visquit.store.hasMany(db.visquit.orders, {
 db.visquit.menu.belongsTo(db.visquit.store, {
   foreignKey: 'store_id'
 });
-db.visquit.menu.hasMany(db.visquit.orderitem, {
-  foreignKey: 'menu_id'
-});
 
   /*_____________ORDERS_TB_____________*/
 
-db.visquit.orders.belongsTo(db.visquit.store, {
+db.visquit.order.belongsTo(db.visquit.store, {
   foreignKey: 'store_id'
 });
-db.visquit.orders.hasMany(db.visquit.orderitem, {
-  foreignKey: 'order_id'
-});
 
-  /*_____________ORDERITEM_TB_____________*/
-
-db.visquit.orderitem.belongsTo(db.visquit.menu, {
-  foreignKey: 'menu_id'
-});
-db.visquit.orderitem.belongsTo(db.visquit.orders, {
-  foreignKey: 'order_id'
-});
 
 
 module.exports=db;

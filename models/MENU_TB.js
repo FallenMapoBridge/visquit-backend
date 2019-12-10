@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    timestamps:false,
     tableName: 'MENU_TB'
+    timestamps:false,
   });
 };
