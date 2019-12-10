@@ -6,6 +6,7 @@ const httpcode = require('../common/http_status_enum');
 const identifyStore = require('../common/identifyStore');
 const identifyStoreByNuguId = require('../common/identifyStoreByNuguId');
 const onEvent = require('../common/onEvent');
+const fs=require('fs');
 
 
 // function foo(par1,par2){
@@ -153,7 +154,11 @@ function updateOrder(req, res) {
 
 
 function createOrder(req, res) {
-
+  fs.writeFile ("createorder.json", JSON.stringify(req.body,null," "), function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);
 
   db.visquit.menu.findOne({
     where: {

@@ -49,7 +49,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'ORDER_TB'
+    tableName: 'ORDER_TB',
     timestamps:false,
   });
 };

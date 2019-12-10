@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'STORE_TB'
+    tableName: 'STORE_TB',
     timestamps:false,
   });
 };
