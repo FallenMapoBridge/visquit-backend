@@ -6,6 +6,9 @@ const httpcode = require('../common/http_status_enum');
 const identifyStore = require('../common/identifyStore');
 const identifyStoreByNuguId = require('../common/identifyStoreByNuguId');
 const onEvent = require('../common/onEvent');
+const moment=require('moment');
+const moment_timezone=require('moment-timezone')
+moment.tz.setDefault("Asia/Seoul");
 const fs=require('fs');
 
 
@@ -168,8 +171,10 @@ function createOrder(req, res) {
     .then((menu_info) => {
       db.visquit.order.create({
         store_id: 1,
-        order_date: null,
-        order_time: null,
+        menu_id:menu_info.menu_id,
+        order_date: moment().format('YYYY-MM-DD'),
+        order_time:moment().format('HH:mm:ss'),
+        order_quantity:req.body.action.parameters.count.value,
         order_price:
           menu_info.menu_price * req.body.action.parameters.count.value,
         serve_fl: false,
@@ -179,7 +184,7 @@ function createOrder(req, res) {
             "version": "2.0",
             "resultCode": "OK",
             "output": {
-              "orderId": createdOrder.order_id
+              "order_id": createdOrder.order_id
             },
           }
           res.status(httpcode.HTTP_OK).json(response);

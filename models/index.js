@@ -5,9 +5,10 @@ const env = process.env.NODE_ENV;
 
 // const config =x
 const config = require(`${__dirname}/../config/sequelize.json`)[env];
-const sequelize = new Sequelize('VISQUIT', config.username, config.password, {
+const sequelize = new Sequelize(config.database, config.username, config.password, {
   host: config.host,
   dialect: config.dialect,
+  timezone: '+09:00'
 });
 
 const db = {};
