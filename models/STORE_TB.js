@@ -21,7 +21,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     store_tel: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(30),
+      allowNull: true
+    },
+    nugu_id: {
+      type: DataTypes.STRING(32),
       allowNull: true
     }
   }, {

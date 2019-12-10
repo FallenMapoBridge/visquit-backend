@@ -1,5 +1,5 @@
 const express = require('express');
-const Sequelize = require('Sequelize');
+const Sequelize = require('sequelize');
 const db = require('../../models/index');
 const BaseResult = require('../common/baseResult');
 const httpcode = require('../common/http_status_enum');

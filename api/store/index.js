@@ -11,6 +11,9 @@ const storeController = require('./store.controller');
 
 // router.get(orderController.printdeat());
 
+router.post('/',storeController.registerStore);
+
+router.post('/user',storeController.registerUser);
 
 router.post('/:sid/orders',storeController.createOrder);
 
