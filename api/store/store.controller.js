@@ -6,10 +6,10 @@ const httpcode = require('../common/http_status_enum');
 const identifyStore = require('../common/identifyStore');
 const identifyStoreByNuguId = require('../common/identifyStoreByNuguId');
 const onEvent = require('../common/onEvent');
-const moment=require('moment');
-const moment_timezone=require('moment-timezone')
+const moment = require('moment');
+const moment_timezone = require('moment-timezone')
 moment.tz.setDefault("Asia/Seoul");
-const fs=require('fs');
+const fs = require('fs');
 
 
 // function foo(par1,par2){
@@ -157,11 +157,11 @@ function updateOrder(req, res) {
 
 
 function createOrder(req, res) {
-  fs.writeFile ("createorder.json", JSON.stringify(req.body,null," "), function(err) {
+  fs.writeFile("createorder.json", JSON.stringify(req.body, null, " "), function (err) {
     if (err) throw err;
     console.log('complete');
-    }
-);
+  }
+  );
 
   db.visquit.menu.findOne({
     where: {
@@ -171,10 +171,10 @@ function createOrder(req, res) {
     .then((menu_info) => {
       db.visquit.order.create({
         store_id: 1,
-        menu_id:menu_info.menu_id,
+        menu_id: menu_info.menu_id,
         order_date: moment().format('YYYY-MM-DD'),
-        order_time:moment().format('HH:mm:ss'),
-        order_quantity:req.body.action.parameters.count.value,
+        order_time: moment().format('HH:mm:ss'),
+        order_quantity: req.body.action.parameters.count.value,
         order_price:
           menu_info.menu_price * req.body.action.parameters.count.value,
         serve_fl: false,
@@ -254,8 +254,38 @@ function registerUser(req, res) {
   });
 }
 
+function getOrderInfo(req, res) {
+  
+  db.visquit.order.findOne({
+    where: {
+      order_id: req.body.action.parameters.order.value,
+    }
+  }).then((orderInfo) => {
+    db.visquit.menu.findOne({
+      where: {
+        menu_id: orderInfo.menu_id,
+      }
+    }).then((menuInfo) => { 
+      const response = {
+        "version": "2.0",
+        "resultCode": "OK",
+        "output": {
+          "order_id": req.body.action.parameters.order.value.order_id,
+          "menu_name":menuInfo.menu_name,
+          "order_quantity":orderInfo.order_quantity,
+          "order_price":orderInfo.order_quantity*menuInfo.menu_price,
+        },
+      }
+      res.status(httpcode.HTTP_OK).json(response);
+    })
+
+  })
+
+}
+
 module.exports.getCurrentOrder = getCurrentOrder;
 module.exports.getOrderHistory = getOrderHistory;
+module.exports.getOrderInfo = getOrderInfo;
 module.exports.updateOrder = updateOrder;
 module.exports.createOrder = createOrder;
 module.exports.registerStore = registerStore

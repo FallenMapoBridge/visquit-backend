@@ -22,6 +22,8 @@ app.get('/health', (req, res) => {
 });
 
 app.post('/order_confirm',storeController.createOrder);
+
+app.post('/order_check',storeController.getOrderInfo);
 // app.use('path',require('middleware javascript path'));
 
 app.use('/store', require('./api/store/index'));
