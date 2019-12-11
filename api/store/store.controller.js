@@ -165,7 +165,8 @@ function createOrder(req, res) {
 
   db.visquit.menu.findOne({
     where: {
-      menu_name: req.body.action.parameters.menu.value,
+      menu_name: req.body.action.parameters.menu.value.replace(/ /g,'')
+,
     }
   })
     .then((menu_info) => {
