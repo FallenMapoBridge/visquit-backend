@@ -13,8 +13,8 @@
       "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host" : "virtserver.swaggerhub.com",
-  "basePath" : "/FallenMapoBridge/Visquit/1.0.0",
+  "host" : "visquit.ga",
+  "basePath" : "/",
   "tags" : [ {
     "name" : "store",
     "description" : "Order,store information"
@@ -22,7 +22,7 @@
     "name" : "menu",
     "description" : "Menu Information"
   } ],
-  "schemes" : [ "https", "http" ],
+  "schemes" : [ "http" ],
   "paths" : {
     "/store" : {
       "post" : {
@@ -207,6 +207,14 @@
           "description" : "메뉴를 만들고 싶은 가게의 store_id",
           "required" : true,
           "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Menu 등록에 필요한 정보",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Menu"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -265,6 +273,14 @@
           "description" : "수정하고 싶은 메뉴의 menu_id",
           "required" : true,
           "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Menu 수정에 필요한 정보",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Menu"
+          }
         } ],
         "responses" : {
           "200" : {
