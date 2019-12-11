@@ -4,6 +4,8 @@ const httpcode = require('./api/common/http_status_enum')
 const all_routes = require('express-list-endpoints');
 const storeController=require('./api/store/store.controller');
 const fs = require('fs');
+const swaggerUi=require('swagger-ui-express');
+const swaggerDoc=require('./docs/swagger.json');
 
 
 const app = express();
@@ -13,6 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc));
 
 app.get('/health', (req, res) => {
   res.status(httpcode.HTTP_OK).send("OK");
