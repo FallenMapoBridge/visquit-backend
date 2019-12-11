@@ -137,7 +137,7 @@ function updateMenu(req, res) {
     })
     .then((updatedMenu) => {
       response.status='OK';
-      response.results.push(updateMenu);
+      response.results.push(updatedMenu);
      })
     .catch((err) => {
       onEvent.onSQLQueryError(res);
