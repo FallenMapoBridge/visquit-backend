@@ -16,20 +16,20 @@ module.exports = function(sequelize, DataTypes) {
         key: 'user_id'
       }
     },
+    store_device: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     store_location: {
       type: DataTypes.STRING(32),
       allowNull: true
     },
     store_tel: {
-      type: DataTypes.STRING(30),
-      allowNull: true
-    },
-    nugu_id: {
-      type: DataTypes.STRING(32),
+      type: DataTypes.STRING(13),
       allowNull: true
     }
   }, {
+    tableName: 'STORE_TB',
     timestamps:false,
-    tableName: 'STORE_TB'
   });
 };

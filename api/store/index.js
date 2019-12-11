@@ -21,7 +21,7 @@ router.get('/:sid/orders',storeController.getCurrentOrder);
 
 router.get('/:sid/orders/history',storeController.getOrderHistory);
 
-router.put('/:sid/orders/:oid',storeController.updateOrder);
+router.patch('/:sid/orders/:oid',storeController.updateOrder);
 // flag에 따라 update order 혹은 completeorder
 
 // router.post()

@@ -6,6 +6,10 @@ const httpcode = require('../common/http_status_enum');
 const identifyStore = require('../common/identifyStore');
 const identifyStoreByNuguId = require('../common/identifyStoreByNuguId');
 const onEvent = require('../common/onEvent');
+const moment=require('moment');
+const moment_timezone=require('moment-timezone')
+moment.tz.setDefault("Asia/Seoul");
+const fs=require('fs');
 
 
 // function foo(par1,par2){
@@ -14,7 +18,7 @@ const onEvent = require('../common/onEvent');
 function getCurrentOrder(req, res) { // order history는 store 정보에서
   const response = new BaseResult();
 
-  const currentOrder = db.visquit.orders.findAll({
+  const currentOrder = db.visquit.order.findAll({
     where: {
       store_id: req.params.sid,
       serve_fl: { [Sequelize.Op.eq]: 0 }
@@ -57,7 +61,7 @@ function getCurrentOrder(req, res) { // order history는 store 정보에서
 function getOrderHistory(req, res) { // order history는 store 정보에서
   const response = new BaseResult();
 
-  const currentOrder = db.visquit.orders.findAll({
+  const currentOrder = db.visquit.order.findAll({
     where: {
       store_id: req.params.sid,
       serve_fl: { [Sequelize.Op.eq]: 1 }
@@ -102,7 +106,7 @@ function updateOrder(req, res) {
   const response = new BaseResult();
 
 
-  const updateOrder = db.visquit.orders
+  const updateOrder = db.visquit.order
     .update({ serve_fl: true }, {
       where: {
         order_id: req.params.oid
@@ -132,7 +136,7 @@ function updateOrder(req, res) {
       Promise.all([updateOrder])
         .then(() => {
           res.status(httpcode.HTTP_OK).json(response);
-          
+
         })
         .catch((err) => {
           onEvent.onSQLQueryError(res);
@@ -153,66 +157,65 @@ function updateOrder(req, res) {
 
 
 function createOrder(req, res) {
+  fs.writeFile ("createorder.json", JSON.stringify(req.body,null," "), function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);
 
-  db.visquit.store.findOne({
+  db.visquit.menu.findOne({
     where: {
-      nugu_id: req.body.profile.privatePlay.deviceKey
+      menu_name: req.body.action.parameters.menu.value,
     }
   })
-    .then((store_information) => {
-      db.visquit.menu.findOne({
-        where: {
-          menu_name: req.body.action.parameters.menu.value,
-          store_id: store_information.store_id,
-        }
+    .then((menu_info) => {
+      db.visquit.order.create({
+        store_id: 1,
+        menu_id:menu_info.menu_id,
+        order_date: moment().format('YYYY-MM-DD'),
+        order_time:moment().format('HH:mm:ss'),
+        order_quantity:req.body.action.parameters.count.value,
+        order_price:
+          menu_info.menu_price * req.body.action.parameters.count.value,
+        serve_fl: false,
       })
-        .then((menu_info) => {
-          db.visquit.orders.create({
-            store_id: store_information.store_id,
-            order_date: null,
-            order_time: null,
-            order_price:
-              menu_info.menu_price * req.body.action.parameters.count.value,
-            serve_fl: false,
-          })
-            .then((createdOrder) => {
-              const response = {
-                "version": "2.0",
-                "resultCode": "OK",
-                "output": {
-                  "orderId": createOrder.order_id
-                },
-              }
-              res.status(httpcode.HTTP_OK).json(response);
+        .then((createdOrder) => {
+          const response = {
+            "version": "2.0",
+            "resultCode": "OK",
+            "output": {
+              "order_id": createdOrder.order_id
+            },
+          }
+          res.status(httpcode.HTTP_OK).json(response);
 
-            })
         })
     })
-/*
-  identifyStoreByNuguId(req.params.sid) // 수정해야함.
-    .then((isValid) => {
-      if (!isValid) {
-        onEvent.onInValidStoreId(res);
-        return;
-      }
-      Promise
-        .all([currentOrder])
-        .then(() => {
-          res.status(httpcode.HTTP_OK)
-            .json(response);
-        })
-        .catch((error) => {
-          onEvent.onSQLQueryError(res);
-          console.log(error);
+  /*
+    identifyStoreByNuguId(req.params.sid) // 수정해야함.
+      .then((isValid) => {
+        if (!isValid) {
+          onEvent.onInValidStoreId(res);
           return;
-        })
-    })
-    .catch((error) => {
-      console.log(error);
-      onEvent.onSQLQueryError(res);
-      return;
-    })
-    */
+        }
+        Promise
+          .all([currentOrder])
+          .then(() => {
+            res.status(httpcode.HTTP_OK)
+              .json(response);
+          })
+          .catch((error) => {
+            onEvent.onSQLQueryError(res);
+            console.log(error);
+            return;
+          })
+      })
+      .catch((error) => {
+        console.log(error);
+        onEvent.onSQLQueryError(res);
+        return;
+      })
+      */
 
 }
 
