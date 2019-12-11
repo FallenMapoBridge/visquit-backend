@@ -13,7 +13,7 @@
       "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host" : "virtserver.swaggerhub.com",
+  "host" : "visquit.ga",
   "basePath" : "/FallenMapoBridge/Visquit/1.0.0",
   "tags" : [ {
     "name" : "store",
